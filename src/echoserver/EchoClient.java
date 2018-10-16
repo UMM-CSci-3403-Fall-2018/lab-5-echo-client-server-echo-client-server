@@ -19,18 +19,20 @@ public class EchoClient {
       // connect to server
       Socket socket = new Socket(server, portNumber);
 
-      // scanner to read from standard input
-      Scanner input = new Scanner(System.in);
+      // Buffered Reader to read from standard input
+      BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
       // printwriter to send stuff to the server
       PrintWriter output = new PrintWriter(socket.getOutputStream());
 
-      // scanner to read what the server sends back
-      Scanner serverInput = new Scanner(socket.getInputStream());
+      // Get the input stream so we can read from that socket
+      InputStream input = socket.getInputStream();
+      BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
-      while(input.hasNextByte()) {
-        output.print(input.nextByte());
-        System.out.print(serverInput.nextByte());
+      String userInput;
+      while((userInput = stdin.readLine()) != null) {
+        output.print(userInput);
+        System.out.print(reader.readLine());
       }
 
       socket.close();
