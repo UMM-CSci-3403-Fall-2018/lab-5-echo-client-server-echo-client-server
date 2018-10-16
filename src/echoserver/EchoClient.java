@@ -1,7 +1,6 @@
 package echoserver;
 import java.io.*;
 import java.net.*;
-import java.util.Scanner;
 
 public class EchoClient {
   public static final int portNumber = 6013;
@@ -35,6 +34,10 @@ public class EchoClient {
         System.out.print(reader.readLine());
       }
 
+      output.close();
+      stdin.close();
+      input.close();
+      reader.close();
       socket.close();
 
     } catch (ConnectException ce) {
