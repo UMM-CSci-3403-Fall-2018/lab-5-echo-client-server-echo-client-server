@@ -3,7 +3,7 @@ import java.io.*;
 import java.net.*;
 
 public class EchoClient {
-  public static final int portNumber = 6013;
+  public static final int portNumber = 6014;
 
   public static void main(String[] args) throws IOException{
     String server;
