@@ -18,13 +18,16 @@ public class EchoServer {
 
                 // Construct a writer so we can write to the socket, thereby
                 // sending something back to the client.
-                PrintWriter writer = new PrintWriter(client.getOutputStream(), true);
+                OutputStream clientOut = client.getOutputStream();
 
                 // Get input from the client
-                BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                InputStream clientIn = client.getInputStream();
 
-                // echo what the client sends us
-                writer.println(reader.readLine());
+                int input;
+                while((input = clientIn.read()) != -1) {
+                    clientOut.write(input);
+                }
+                clientOut.flush();
 
                 // Close the client socket since we're done.
                 client.close();
